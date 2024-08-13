@@ -4,17 +4,38 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-1. Install dependencies
+1. Node version
+v18.20.3
+
+1.1 Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Start the app local
 
    ```bash
     npx expo start
    ```
+2.1 Caso tenha problemas para rodar o projeto com o comando acima (ex: falha de conexão) 
+Executar especificando a porta:
+
+   ```bash
+    npx expo start -p 19000
+   ```
+
+3. Criar diretório Android local (código nativo)
+
+   ```bash
+    npx expo run:android
+   ```
+
+4. Criar diretório iOS local (código nativo)- Necessário utilizar MacOS Xcode ou Xcode Cloud
+
+```bash
+   npx expo run:ios
+```
 
 In the output, you'll find options to open the app in a
 
