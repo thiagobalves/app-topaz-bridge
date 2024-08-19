@@ -9,6 +9,10 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.vscode/
+%ProgramData%/
+*.lock
+*lock.json
 
 # native
 /android

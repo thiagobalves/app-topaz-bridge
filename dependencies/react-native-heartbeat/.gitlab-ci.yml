@@ -1,0 +1,37 @@
+image: python:3.7
+
+stages:
+  - verify_version
+  - publish
+  - release_link
+
+
+verify:
+  stage: verify_version
+  script:
+    - python3 Scripts/validate_version.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE =~ /^(push|web)$/ && ($CI_COMMIT_REF_NAME =~ /^(rb(_\d+)+)$/ || $CI_COMMIT_REF_NAME =~ /^(\d+\.){2}\d+$/)'
+      when: always
+
+publish-version:
+  stage: publish
+  script:
+    - pip3 install -r Scripts/requirements.txt
+    - python3 Scripts/publish.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE =~ /^(push|web)$/ && ($CI_COMMIT_REF_NAME =~ /^(rb(_\d+)+)$/ || $CI_COMMIT_REF_NAME =~ /^(\d+\.){2}\d+$/)'
+      when: manual
+      allow_failure: true
+
+release-link:
+  stage: release_link
+  dependencies:
+    - publish-version
+  script:
+    - pip3 install -r Scripts/requirements.txt
+    - python3 Scripts/publish_release_link.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE =~ /^(push|web)$/ && ($CI_COMMIT_REF_NAME =~ /^(rb(_\d+)+)$/ || $CI_COMMIT_REF_NAME =~ /^(\d+\.){2}\d+$/)'
+      when: manual
+      allow_failure: true

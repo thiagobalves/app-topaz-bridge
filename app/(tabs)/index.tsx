@@ -4,8 +4,15 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import HeartbeatBridge from 'react-native-heartbeat';
 
 export default function HomeScreen() {
+  HeartbeatBridge.start('frt-hmg', (success: any) => {
+    console.log("areis: " + success);
+  }, (failure: any) => {
+      console.log("areis: " + failure);
+  });
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#FFC905', dark: '#FFC905' }}
